@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/autovance/autovance-fee-api/issues"
   },
-  "homepage": "https://github.com/autovance/autovance-fee-api"
+  "homepage": "https://github.com/autovance/autovance-fee-api",
+  "dependencies": {
+    "lodash": "^3.7.0",
+    "redis": "^0.12.1",
+    "restify": "^3.0.2",
+    "schedule": "^0.1.0",
+    "when": "^3.7.2"
+  }
 }
