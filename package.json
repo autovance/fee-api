@@ -1,0 +1,19 @@
+{
+  "name": "autovance-fee-api",
+  "version": "1.0.0",
+  "description": "Stripe fee aggregation",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/autovance/autovance-fee-api"
+  },
+  "author": "Matt Forster <matt@autovance.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/autovance/autovance-fee-api/issues"
+  },
+  "homepage": "https://github.com/autovance/autovance-fee-api"
+}
