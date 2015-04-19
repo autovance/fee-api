@@ -15,8 +15,8 @@ redisClient.auth() //? probably needed
 // report on the last weeks list .. still stores historical datanpm
 
 
-function Transaction() {
-  this.client = redisClient;
+function Transaction(client) {
+  this.client = client || redisClient;
   this.key = null;
 
   this.date = null;
@@ -25,7 +25,7 @@ function Transaction() {
   this.price = null;
 }
 
-function Transaction.prototype.save = function() {
+Transaction.prototype.save = function() {
 
   if (_.any([this.time, this.date, this.price, this.name], function (item) {
     return _.isEmpty(item);
@@ -34,39 +34,42 @@ function Transaction.prototype.save = function() {
   }
 
   var promise, multi = this.client.multi(),
-    week = moment.isoWeek();
+    week = moment().isoWeek();
 
   promise = when.promise(function (resolve, reject) {
-    this.key = this.client.get('tkey', function (err, reply) {
+    this.client.get('tkey', function (err, reply) {
       if (err || (reply === null)) reject(new Error('No trans key?'));
 
+      this.key = reply;
+
       multi.incr('tkey');
-      multi.hmset({
-        key: this.key,
+      multi.hmset(this.key, {
         date: this.date,
         time: this.time,
         name: this.name,
         price: this.price
       });
-      mutli.rpush(week, this.key);
+      multi.rpush(week, this.key);
 
       multi.exec(function (err, replies) {
         if (err) {
-          console.log('SAVE TRANS: ' + this.key + 'FAIL');
+          console.log('save trans ' + this.key + ': FAIL');
           reject(new Error(err));
+          return false;
         }
 
-        console.log('SAVE TRANS: ' + this.key + ' SUCCESS');
+        console.log('save trans ' + this.key + ': SUCCESS');
         resolve(replies);
-      });
-    });
-  });
+        return true;
+      }.bind(this));
+    }.bind(this));
+  }.bind(this));
 
   return promise;
 }
 
-function TransactionList() {
-  this.client = redisClient;
+function TransactionList(client) {
+  this.client = client || redisClient;
   this.key = null;
   this.transactions = [];
 }
@@ -122,6 +125,6 @@ TransactionList.prototype.fetch = function (week) {
 }
 
 module.exports = {
-  list = TransactionList,
-  item = Transaction
+  list: TransactionList,
+  item: Transaction
 };
