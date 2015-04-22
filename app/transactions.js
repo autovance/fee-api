@@ -3,9 +3,16 @@ var _ = require('lodash'),
   redis = require('redis'),
   when = require('when'),
   moment = require('moment'),
+  url = require('url'),
+  redisClient, redisURL;
+if (process.env.NODE_ENV === 'production') {
+  redisURL = url.parse(process.env.REDISCLOUD_URL);
+  redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
+  redisClient.auth(redisURL.auth.split(":")[1]);
+} else {
   redisClient = redis.createClient();
+}
 
-redisClient.auth('8NdtfFO1xb4zsnYw'); //? probably needed
 
 // Transaction Models
 
