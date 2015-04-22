@@ -15,14 +15,14 @@ redisClient.auth() //? probably needed
 // report on the last weeks list .. still stores historical datanpm
 
 
-function Transaction(client) {
+function Transaction(obj, client) {
   this.client = client || redisClient;
-  this.key = null;
 
-  this.date = null;
-  this.time = null;
-  this.name = null;
-  this.price = null;
+  this.key = (obj) ? obj.key : null;
+  this.date = (obj) ? obj.date : null;
+  this.time = (obj) ? obj.time : null;
+  this.name = (obj) ? obj.name : null;
+  this.price = (obj) ? obj.price : null;
 }
 
 Transaction.prototype.save = function() {
@@ -37,13 +37,14 @@ Transaction.prototype.save = function() {
     week = moment().isoWeek();
 
   promise = when.promise(function (resolve, reject) {
-    this.client.get('tkey', function (err, reply) {
+    this.client.incr('tkey', function (err, reply) {
       if (err || (reply === null)) reject(new Error('No trans key?'));
 
       this.key = reply;
 
       multi.incr('tkey');
       multi.hmset(this.key, {
+        key: this.key,
         date: this.date,
         time: this.time,
         name: this.name,
@@ -57,7 +58,6 @@ Transaction.prototype.save = function() {
           reject(new Error(err));
           return false;
         }
-
         console.log('save trans ' + this.key + ': SUCCESS');
         resolve(replies);
         return true;
@@ -75,13 +75,16 @@ function TransactionList(client) {
 }
 
 TransactionList.prototype.sum = function () {
-  var sum = 0;
+  var promise, sum = 0;
 
-  _.forEach(this.transactions, function (trans) {
-    sum += trans.price;
-  });
+  promise = when.promise(function (resolve, reject) {
+    _.forEach(this.transactions, function (trans) {
+      sum += +trans.price;
+    });
+    resolve(sum);
+  }.bind(this));
 
-  return sum;
+  return promise;
 }
 
 TransactionList.prototype.save = function () {
@@ -95,7 +98,7 @@ TransactionList.prototype.save = function () {
     when.all(actions)
     .then(resolve)
     .catch(reject);
-  });
+  }.bind(this));
 
   return promise;
 
@@ -106,22 +109,25 @@ TransactionList.prototype.fetch = function (week) {
   this.transactions = [];
 
   promise = when.promise(function (resolve, reject) {
-    client.lrange(week, 0, -1, function (err, replies) {
+    this.client.lrange(week, 0, -1, function (err, replies) {
       if (err) reject(err);
+
+      if (_.isEmpty(replies)) {
+        resolve(false);
+      }
 
       replies.forEach(function (reply, i) {
 
-        client.get(reply, function (err, reply) {
+        this.client.hgetall(reply, function (err, reply) {
           if (err) reject(err);
-          this.transactions.push(reply);
-        });
+          this.transactions.push(new Transaction(reply));
+          resolve(true);
+        }.bind(this));
+      }.bind(this));
+    }.bind(this));
+  }.bind(this));
 
-      });
-
-      resolve(true);
-    });
-
-  });
+  return promise;
 }
 
 module.exports = {

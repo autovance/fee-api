@@ -30,7 +30,7 @@ module.exports = {
     var promise, client = redis.createClient();
 
     promise = when.promise(function (resolve, reject) {
-      client.set('tkey', 0, function (err, reply) {
+      client.set('tkey', -1, function (err, reply) {
 
         if (err || reply === null) {
           client.quit();
