@@ -18,9 +18,7 @@ server.pre(restify.pre.sanitizePath());
 
 // see ./routes
 server.post({path: '/events/save',         version: '0.1.0'}, routes.saveEvent);
-server.get( {path: '/events/report',       version: '0.1.0'}, routes.report);
-server.get({path: '/events/report/:time',  version: '0.1.0'}, routes.report);
-
+server.get( {path: '/events/report',       version: '0.1.0'}, routes.reportEvents);
 
 // Go!
 server.listen(3000, function () {

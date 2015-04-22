@@ -192,6 +192,8 @@ describe("Transaction Models", function (done) {
         list.sum()
         .then(function (reply) {
           expect(reply).to.equal((+item1.price) + (+item2.price));
+          expect(reply).to.equal(33.44 + 33.45);
+          expect(reply).to.equal(66.89);
           done();
         });
       });
