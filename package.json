@@ -1,6 +1,9 @@
 {
   "name": "autovance-fee-api",
   "version": "1.0.0",
+  "engines": {
+      "iojs": "1.x"
+    },
   "description": "Stripe fee aggregation",
   "main": "app.js",
   "scripts": {
