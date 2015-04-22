@@ -5,7 +5,7 @@ var _ = require('lodash'),
   moment = require('moment'),
   redisClient = redis.createClient();
 
-redisClient.auth() //? probably needed
+redisClient.auth(8NdtfFO1xb4zsnYw); //? probably needed
 
 // Transaction Models
 
