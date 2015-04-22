@@ -24,6 +24,6 @@ server.get( {path: '/events/report',       version: '0.1.0'}, routes.reportEvent
 // Go!
 
 var port = process.env.PORT || 3000;
-server.listen(3000, function () {
+server.listen(port, function () {
   console.log('%s: Listening on: %s', server.name, server.url);
 });
