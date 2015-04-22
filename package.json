@@ -7,7 +7,8 @@
   "description": "Stripe fee aggregation",
   "main": "app.js",
   "scripts": {
-    "test": "npm test"
+    "test": "mocha tests",
+    "start": "iojs app"
   },
   "repository": {
     "type": "git",
