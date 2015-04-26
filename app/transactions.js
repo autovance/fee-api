@@ -35,7 +35,7 @@ function Transaction(obj, client) {
 Transaction.prototype.save = function() {
 
   if (_.any([this.time, this.date, this.amount, this.name], function (item) {
-    return _.isEmpty(item);
+    return _.isNull(item);
   })) {
     return when.reject(new Error('Transaction fields must be set before saving.'));
   }
@@ -49,7 +49,6 @@ Transaction.prototype.save = function() {
 
       this.key = reply;
 
-      multi.incr('tkey');
       multi.hmset(this.key, {
         key: this.key,
         date: this.date,
@@ -73,6 +72,13 @@ Transaction.prototype.save = function() {
   }.bind(this));
 
   return promise;
+}
+
+Transaction.prototype.set = function (obj) {
+  this.date = obj.date;
+  this.time = obj.time;
+  this.name = obj.name;
+  this.amount = obj.amount;
 }
 
 function TransactionList(client) {
@@ -112,7 +118,7 @@ TransactionList.prototype.save = function () {
 }
 
 TransactionList.prototype.fetch = function (week) {
-  var promise;
+  var promise, actions = [];
   this.transactions = [];
 
   promise = when.promise(function (resolve, reject) {
@@ -123,14 +129,23 @@ TransactionList.prototype.fetch = function (week) {
         resolve(false);
       }
 
-      replies.forEach(function (reply, i) {
+      _.forEach(replies, (function (reply) {
 
-        this.client.hgetall(reply, function (err, reply) {
-          if (err) reject(err);
-          this.transactions.push(new Transaction(reply));
-          resolve(true);
-        }.bind(this));
-      }.bind(this));
+        actions.push(when.promise(function (resolve, reject) {
+          this.client.hgetall(reply, function (err, reply) {
+            if (err) reject(err);
+            this.transactions.push(new Transaction(reply));
+            resolve(true);
+          }.bind(this));
+        }.bind(this)));
+
+      }.bind(this)));
+
+      when.all(actions)
+      .then(function () {
+        resolve(true);
+      });
+
     }.bind(this));
   }.bind(this));
 

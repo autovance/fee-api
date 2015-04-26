@@ -11,41 +11,44 @@ var Item = require('./transactions').item,
 module.exports = {
 
   save: function (trans) {
-    var promise, list = new List();
+    var promise, actions = [], list = new List();
 
     promise = when.promise(function (resolve, reject) {
-
-      console.log(trans.data.object.source);
 
       stripe.balance.retrieveTransaction(
         trans.data.object.balance_transaction,
         function(err, balanceTransaction) {
+
           if (err) {
             console.log(err);
             reject(err);
             return false;
           }
 
-          var date = moment(balanceTransaction.available_on).format('YYYY-MM-DD'),
-              time = moment(balanceTransaction.available_on).format('HH:MM')
+          var date = moment(balanceTransaction.available_on).format('YYYY.MM.DD'),
+              time = moment(balanceTransaction.available_on).format('HH:MM');
 
           _.forEach(balanceTransaction.fee_details, function (fee) {
-            var item = new Item({
+            var obj;
+
+            console.log(fee);
+
+            obj = {
               date: date,
               time: time,
               name: fee.description,
               amount: fee.amount
-            });
+            };
 
-            list.transactions.push(item);
+            list.transactions.push(new Item(obj));
           });
 
           list.save()
-          .then(function (reply) {
-            resolve(reply);
-          })
           .catch(function (err) {
             reject(err);
+          })
+          .then(function (reply) {
+            resolve(reply);
           });
         }
       );
@@ -56,12 +59,11 @@ module.exports = {
   },
 
   report: function () {
-    var promise, list = new List(), week = moment.isoWeek();
+    var promise, list = new List(), week = moment().isoWeek();
 
-    list.fetch(week)
-    .then(function (reply) {
-      console.log(reply);
-      console.log(list.transacions);
+    return list.fetch(week)
+    .then(function (result) {
+      return list;
     });
   }
 

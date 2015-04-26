@@ -21,7 +21,7 @@ describe("Transaction Models", function (done) {
     init.create();
     redisClient = redis.createClient();
     list = new Transactions.list(redisClient);
-    item = new Transactions.item(redisClient);
+    item = new Transactions.item(null, redisClient);
   });
 
   afterEach(function () {
@@ -45,10 +45,12 @@ describe("Transaction Models", function (done) {
       it('should increment the transaction key', function (done) {
 
         redisClient.get('tkey', function (err, reply) {
-          item.date = moment().format('YYYY.MM.DD');
-          item.time = moment().format('HH:SS');
-          item.name = 'Test Transaction';
-          item.price = '33.44';
+          item.set({
+            date: moment().format('YYYY.MM.DD'),
+            time: moment().format('HH:SS'),
+            name: 'Test Transaction',
+            amount: '33.44'
+          });
 
           item.save()
           .then(function () {
@@ -65,7 +67,7 @@ describe("Transaction Models", function (done) {
         item.date = moment().format('YYYY.MM.DD');
         item.time = moment().format('HH:SS');
         item.name = 'Test Transaction';
-        item.price = '33.44';
+        item.amount = '33.44';
 
         item.save()
         .then(function () {
@@ -80,7 +82,7 @@ describe("Transaction Models", function (done) {
         item.date = moment().format('YYYY.MM.DD');
         item.time = moment().format('HH:SS');
         item.name = 'Test Transaction';
-        item.price = '33.44';
+        item.amount = '33.44';
 
         item.save()
         .then(function () {
@@ -91,7 +93,7 @@ describe("Transaction Models", function (done) {
                 date: item.date,
                 time: item.time,
                 name: item.name,
-                price: item.price
+                amount: item.amount
               });
               done();
             });
@@ -109,15 +111,19 @@ describe("Transaction Models", function (done) {
         var item1 = new Transactions.item(),
           item2 = new Transactions.item();
 
-        item1.date = moment().format('YYYY.MM.DD');
-        item1.time = moment().format('HH:SS');
-        item1.name = 'Test Transaction';
-        item1.price = '33.44';
+        item1.set({
+          date: moment().format('YYYY.MM.DD'),
+          time: moment().format('HH:SS'),
+          name: 'Test Transaction',
+          amount: '33.44'
+        });
 
-        item2.date = moment().format('YYYY.MM.DD');
-        item2.time = moment().format('HH:SS');
-        item2.name = 'Test Transaction';
-        item2.price = '33.44';
+        item2.set({
+          date: moment().format('YYYY.MM.DD'),
+          time: moment().format('HH:SS'),
+          name: 'Test Transaction',
+          amount: '33.45'
+        });
 
         list.transactions[0] = item1;
         list.transactions[1] = item2;
@@ -143,12 +149,12 @@ describe("Transaction Models", function (done) {
         item1.date = moment().format('YYYY.MM.DD');
         item1.time = moment().format('HH:MM');
         item1.name = 'Test Transaction';
-        item1.price = '33.44';
+        item1.amount = '33.44';
 
         item2.date = moment().format('YYYY.MM.DD');
         item2.time = moment().format('HH:MM');
         item2.name = 'Test Transaction';
-        item2.price = '33.45';
+        item2.amount = '33.45';
 
         list.transactions[0] = item1;
         list.transactions[1] = item2;
@@ -172,26 +178,26 @@ describe("Transaction Models", function (done) {
 
     describe('sum', function (done) {
 
-      it('should sum the prices accurately', function (done) {
+      it('should sum the amounts accurately', function (done) {
         var check, item1 = new Transactions.item(),
           item2 = new Transactions.item();
 
         item1.date = moment().format('YYYY.MM.DD');
         item1.time = moment().format('HH:MM');
         item1.name = 'Test Transaction';
-        item1.price = '33.44';
+        item1.amount = '33.44';
 
         item2.date = moment().format('YYYY.MM.DD');
         item2.time = moment().format('HH:MM');
         item2.name = 'Test Transaction';
-        item2.price = '33.45';
+        item2.amount = '33.45';
 
         list.transactions[0] = item1;
         list.transactions[1] = item2;
 
         list.sum()
         .then(function (reply) {
-          expect(reply).to.equal((+item1.price) + (+item2.price));
+          expect(reply).to.equal((+item1.amount) + (+item2.amount));
           expect(reply).to.equal(33.44 + 33.45);
           expect(reply).to.equal(66.89);
           done();
