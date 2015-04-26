@@ -10,6 +10,14 @@ module.exports = {
 
     console.log(trans);
 
+    stripe.balance.retrieveTransaction(
+      trans.data.object.balance_transaction,
+      function(err, balanceTransaction) {
+        console.log(balanceTransaction);
+      }
+    );
+
+    return true;
   },
 
   report: function () {

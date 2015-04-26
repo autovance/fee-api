@@ -7,6 +7,10 @@ module.exports = {
 
   saveEvent: function (req, res, next) {
     events.save(req.body);
+
+    res.write('{message: ');
+    res.write('"success"}');
+    res.end();
     return next();
   },
 
