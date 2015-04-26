@@ -15,7 +15,7 @@ module.exports = {
     stripe.balance.retrieveTransaction(
       trans.data.object.balance_transaction,
       function(err, balanceTransaction) {
-
+        console.log(balanceTransaction);
       }
     );
 
