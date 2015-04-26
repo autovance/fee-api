@@ -29,12 +29,12 @@ function Transaction(obj, client) {
   this.date = (obj) ? obj.date : null;
   this.time = (obj) ? obj.time : null;
   this.name = (obj) ? obj.name : null;
-  this.price = (obj) ? obj.price : null;
+  this.amount = (obj) ? obj.amount : null;
 }
 
 Transaction.prototype.save = function() {
 
-  if (_.any([this.time, this.date, this.price, this.name], function (item) {
+  if (_.any([this.time, this.date, this.amount, this.name], function (item) {
     return _.isEmpty(item);
   })) {
     return when.reject(new Error('Transaction fields must be set before saving.'));
@@ -55,7 +55,7 @@ Transaction.prototype.save = function() {
         date: this.date,
         time: this.time,
         name: this.name,
-        price: this.price
+        amount: this.amount
       });
       multi.rpush(week, this.key);
 
@@ -86,7 +86,7 @@ TransactionList.prototype.sum = function () {
 
   promise = when.promise(function (resolve, reject) {
     _.forEach(this.transactions, function (trans) {
-      sum += +trans.price;
+      sum += +trans.amount;
     });
     resolve(sum);
   }.bind(this));
