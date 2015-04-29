@@ -70,7 +70,7 @@ module.exports = {
         console.log('week list error!');
         console.log(err);
 
-        redisClient.get(moment().isoWeek(), function (err, reply) {
+        redisClient.type(moment().isoWeek(), function (err, reply) {
           console.log(reply);
         })
       }
@@ -82,6 +82,13 @@ module.exports = {
         console.log(err);
       }
       console.log('current transaction key: ' + reply);
+    });
+
+    redisClient.keys('*', function (err, reply) {
+      if (err) {
+        console.log(err);
+      }
+      console.log('keys: ' + reply);
     });
 
   }
