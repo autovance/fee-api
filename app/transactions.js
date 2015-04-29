@@ -134,7 +134,6 @@ TransactionList.prototype.fetch = function (week) {
 
         actions.push(when.promise(function (resolve, reject) {
           this.client.hgetall(reply, function (err, reply) {
-            console.log(err);
             if (err) reject(err);
             this.transactions.push(new Transaction(reply));
             resolve(true);
