@@ -31,14 +31,14 @@ module.exports = {
           _.forEach(balanceTransaction.fee_details, function (fee) {
             var obj;
 
-            console.log(fee);
-
             obj = {
               date: date,
               time: time,
               name: fee.description,
               amount: fee.amount
             };
+
+            console.log(obj);
 
             list.transactions.push(new Item(obj));
           });
