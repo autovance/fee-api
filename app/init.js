@@ -77,7 +77,7 @@ module.exports = {
           console.log('deleted list in response. (' + reply + ' del)');
         })
       }
-      console.log('this weeks list (' + 'w' + moment().isoWeek() + '+: ' + reply);
+      console.log('this weeks list (' + 'w' + moment().isoWeek() + '): ' + reply);
     });
     redisClient.get('tkey', function (err, reply) {
       if (err) {
