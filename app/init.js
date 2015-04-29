@@ -72,6 +72,9 @@ module.exports = {
 
         redisClient.type(moment().isoWeek(), function (err, reply) {
           console.log(reply);
+        });
+        redisClient.del(moment().isoWeek(), function (err, reply) {
+          console.log(reply);
         })
       }
       console.log('this weeks list: ' + reply);
