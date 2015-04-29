@@ -59,6 +59,7 @@ Transaction.prototype.save = function() {
       multi.rpush(week, this.key);
 
       multi.exec(function (err, replies) {
+        console.log(replies);
         if (err) {
           console.log('save trans ' + this.key + ': FAIL');
           reject(new Error(err));
