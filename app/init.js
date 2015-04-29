@@ -67,8 +67,12 @@ module.exports = {
 
     redisClient.lrange(moment().isoWeek(), 0, -1, function (err, reply) {
       if (err) {
-        console.log('week list error: ');
+        console.log('week list error!');
         console.log(err);
+
+        redisClient.get(moment().isoWeek(), function (err, reply) {
+          console.log(reply);
+        })
       }
       console.log('this weeks list: ' + reply);
     });
