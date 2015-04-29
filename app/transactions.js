@@ -48,7 +48,7 @@ Transaction.prototype.save = function() {
       if (err || (reply === null)) reject(new Error('No trans key?'));
 
       this.key = reply;
-
+      console.log(week);
       multi.hmset(this.key, {
         key: this.key,
         date: this.date,
