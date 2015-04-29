@@ -41,14 +41,14 @@ Transaction.prototype.save = function() {
   }
 
   var promise, multi = this.client.multi(),
-    week = moment().isoWeek();
+    week = 'w' + moment().isoWeek();
 
   promise = when.promise(function (resolve, reject) {
     this.client.incr('tkey', function (err, reply) {
       if (err || (reply === null)) reject(new Error('No trans key?'));
 
       this.key = reply;
-      console.log(week);
+      console.log('w'+week);
       multi.hmset(this.key, {
         key: this.key,
         date: this.date,

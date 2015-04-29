@@ -57,7 +57,7 @@ module.exports = {
   },
 
   report: function () {
-    var promise, list = new List(), week = moment().isoWeek();
+    var promise, list = new List(), week = 'w' + moment().isoWeek();
 
     return list.fetch(week)
     .then(function (result) {

@@ -35,7 +35,7 @@ module.exports = {
 
       list.sum()
       .then(function (resp) {
-        res.json({message: 'success', week: moment().isoWeek(), transList: list.transactions, sum: resp});
+        res.json({message: 'success', week: 'w' + moment().isoWeek(), transList: list.transactions, sum: resp});
         res.end();
       });
     });
