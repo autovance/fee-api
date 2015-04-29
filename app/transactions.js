@@ -156,5 +156,6 @@ TransactionList.prototype.fetch = function (week) {
 
 module.exports = {
   list: TransactionList,
-  item: Transaction
+  item: Transaction,
+  client: redisClient
 };

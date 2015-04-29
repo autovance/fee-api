@@ -1,6 +1,8 @@
 "use strict";
 
 var redis = require('redis'),
+  moment = require('moment'),
+  redisClient = require('./transactions').client,
   when = require('when');
 
 // Redis initialization and management
@@ -8,17 +10,15 @@ var redis = require('redis'),
 module.exports = {
 
   isCreated: function () {
-    var promise, client = redis.createClient();
+    var promise;
 
     promise = when.promise(function (resolve, reject) {
-      client.get('tkey', function (err, reply) {
+      redisClient.get('tkey', function (err, reply) {
 
         if (err || reply === null) {
-          client.quit();
-          reject(false);
+          resolve(false);
         }
 
-        client.quit();
         resolve(true);
       });
     });
@@ -27,17 +27,15 @@ module.exports = {
   },
 
   create: function () {
-    var promise, client = redis.createClient();
+    var promise;
 
     promise = when.promise(function (resolve, reject) {
-      client.set('tkey', -1, function (err, reply) {
+      redisClient.set('tkey', -1, function (err, reply) {
 
         if (err || reply === null) {
-          client.quit();
-          reject(false);
+          reject(err);
         }
 
-        client.quit();
         resolve(reply);
       });
     });
@@ -46,26 +44,36 @@ module.exports = {
   },
 
   destroy: function () {
-    var promise, client = redis.createClient();
+    var promise;
 
     promise = when.promise(function (resolve, reject) {
-      client.flushdb(function (err, reply) {
+      redisClient.flushdb(function (err, reply) {
         if (err || reply === null) {
-          client.quit();
           reject(err);
         }
 
         if (reply) {
-          client.quit();
           resolve(reply);
         }
 
-        client.quit();
         reject(reply);
       });
     });
 
     return promise;
+  },
+
+  inspect: function () {
+
+    redisClient.lrange(moment().isoWeek(), 0, -1, function (err, reply) {
+      if (err) console.log(err);
+      console.log('this weeks list: ' + reply);
+    });
+    redisClient.get('tkey', function (err, reply) {
+      if (err) console.log(err);
+      console.log('current transaction key: ' + reply);
+    });
+
   }
 
 };
