@@ -25,6 +25,8 @@ module.exports = {
             return false;
           }
 
+          console.log(balanceTransaction.available_on);
+
           var date = moment(balanceTransaction.available_on).format('YYYY.MM.DD'),
               time = moment(balanceTransaction.available_on).format('HH:MM');
 
