@@ -34,8 +34,8 @@ module.exports = {
       });
 
       list.sum()
-      .then(function (res) {
-        res.json({message: 'success', week: moment().isoWeek(), transList: list.transactions, sum: res});
+      .then(function (resp) {
+        res.json({message: 'success', week: moment().isoWeek(), transList: list.transactions, sum: resp});
         res.end();
       });
     });
