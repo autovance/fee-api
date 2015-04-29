@@ -124,8 +124,11 @@ TransactionList.prototype.fetch = function (week) {
 
   promise = when.promise(function (resolve, reject) {
     this.client.lrange(week, 0, -1, function (err, replies) {
-      console.log(err);
-      if (err) reject(err);
+
+      if (err) {
+        console.log(err);
+        reject(err);
+      }
 
       if (_.isEmpty(replies)) {
         resolve(false);

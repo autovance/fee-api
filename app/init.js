@@ -74,7 +74,7 @@ module.exports = {
           console.log(reply);
         });
         redisClient.del(moment().isoWeek(), function (err, reply) {
-          console.log(reply);
+          console.log('deleted list in response. (' + reply + ' del)');
         })
       }
       console.log('this weeks list: ' + reply);
