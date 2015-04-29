@@ -123,6 +123,7 @@ TransactionList.prototype.fetch = function (week) {
 
   promise = when.promise(function (resolve, reject) {
     this.client.lrange(week, 0, -1, function (err, replies) {
+      console.log(err);
       if (err) reject(err);
 
       if (_.isEmpty(replies)) {
@@ -133,6 +134,7 @@ TransactionList.prototype.fetch = function (week) {
 
         actions.push(when.promise(function (resolve, reject) {
           this.client.hgetall(reply, function (err, reply) {
+            console.log(err);
             if (err) reject(err);
             this.transactions.push(new Transaction(reply));
             resolve(true);
