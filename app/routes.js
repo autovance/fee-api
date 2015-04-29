@@ -33,9 +33,12 @@ module.exports = {
         delete item.client;
       });
 
-      res.json({message: 'success', week: moment().isoWeek(), transList: list.transactions, sum: list.sum()});
-      res.end();
-    })
+      list.sum()
+      .then(function (res) {
+        res.json({message: 'success', week: moment().isoWeek(), transList: list.transactions, sum: res});
+        res.end();
+      });
+    });
 
     return next();
   }
