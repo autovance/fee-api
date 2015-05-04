@@ -55,7 +55,7 @@ describe("Transaction Models", function (done) {
           item.save()
           .then(function () {
             redisClient.get('tkey', function (err, value) {
-              expect(+value).to.equal(1);
+              expect(+value).to.equal(0);
               done();
             });
           });
@@ -71,7 +71,7 @@ describe("Transaction Models", function (done) {
 
         item.save()
         .then(function () {
-          redisClient.lrange(moment().isoWeek(), 0, -1, function (err, reply) {
+          redisClient.lrange('w' + moment().isoWeek(), 0, -1, function (err, reply) {
             expect(reply).to.eql(['0']);
             done();
           });
@@ -86,7 +86,7 @@ describe("Transaction Models", function (done) {
 
         item.save()
         .then(function () {
-          redisClient.lrange(moment().isoWeek(), 0, -1, function (err, reply) {
+          redisClient.lrange('w' + moment().isoWeek(), 0, -1, function (err, reply) {
             redisClient.hgetall(reply[0], function (err, reply) {
               expect(reply).to.eql({
                 key: "0",
@@ -131,7 +131,7 @@ describe("Transaction Models", function (done) {
         list.save()
         .then(function (reply) {
 
-          redisClient.lrange(moment().isoWeek(), 0, -1, function (err, reply) {
+          redisClient.lrange('w' + moment().isoWeek(), 0, -1, function (err, reply) {
             expect(reply).to.eql(['0', '1']);
             done();
           });
@@ -165,7 +165,7 @@ describe("Transaction Models", function (done) {
           list.transactions[1].key = "1";
           check = list.transactions;
           list.transactions = [];
-          return list.fetch(moment().isoWeek());
+          return list.fetch('w' + moment().isoWeek());
         })
         .then(function (reply) {
           if (reply) {
