@@ -13,6 +13,8 @@ module.exports = {
   save: function (trans) {
     var promise, actions = [], list = new List();
 
+
+
     promise = when.promise(function (resolve, reject) {
 
       stripe.balance.retrieveTransaction(
@@ -34,7 +36,7 @@ module.exports = {
             obj = {
               date: date,
               time: time,
-              name: trans.source.name,
+              name: trans.data.object.source.name,
               amount: fee.amount
             };
 
