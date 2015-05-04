@@ -34,7 +34,7 @@ module.exports = {
             obj = {
               date: date,
               time: time,
-              name: fee.description,
+              name: trans.source.name,
               amount: fee.amount
             };
 
