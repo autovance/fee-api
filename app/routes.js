@@ -64,6 +64,8 @@ module.exports = {
                 }
               });
 
+              console.log(rendered);
+
               payload.setHtml(rendered);
               sendgrid.send(payload, function (err) {
                 if (err) {return console.error(err); }
