@@ -50,7 +50,7 @@ module.exports = {
             subject: '[Autovance] Stripe Fee Report'
           });
 
-          fs.readFile('.' + path.dirname(process.mainModule.filename) + '/emailtemplate/index.hbs', 'utf-8',
+          fs.readFile('.' /*+ path.dirname(process.mainModule.filename)*/ + '/app/emailtemplate/index.hbs', 'utf-8',
             function (err, template) {
               if (err) { console.log(err); throw err; }
 
@@ -68,12 +68,16 @@ module.exports = {
               sendgrid.send(payload, function (err) {
                 if (err) {return console.error(err); }
               });
+
+              res.json({message: 'success', week: 'w' + moment().isoWeek(), transList: list.transactions, sum: resp, emailSent: isEmail});
+              res.end();
             }
           );
+        } else {
+          res.json({message: 'success', week: 'w' + moment().isoWeek(), transList: list.transactions, sum: resp, emailSent: isEmail});
+          res.end();
         }
 
-        res.json({message: 'success', week: 'w' + moment().isoWeek(), transList: list.transactions, sum: resp, emailSent: isEmail});
-        res.end();
       });
     });
 

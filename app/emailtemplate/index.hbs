@@ -799,7 +799,7 @@ td,.preheader p{}.preheader td a,.preheader p a{font-weight:700}.wrapper .prehea
       <tr><td>Date</td><td>Customer</td><td>Fee</td><tr>
     </thead>
     <tbody>
-      {{each message.list}}
+      {{#each message.list}}
         <tr><td> {{this.date}} </td> <td> {{this.name}} </td> <td> {{this.amount}} </td></tr>
       {{/each}}
       <tr><td> Total: </td> <td> {{message.total}} </td></tr>
