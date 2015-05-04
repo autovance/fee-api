@@ -54,6 +54,8 @@ module.exports = {
             function (err, template) {
               if (err) { console.log(err); throw err; }
 
+              console.log(slist);
+
               var rendered = handlebars.compile(template)({
                 message: {
                   name: 'Stripe Fee Reporting',
