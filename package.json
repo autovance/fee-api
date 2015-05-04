@@ -1,10 +1,14 @@
 {
   "name": "autovance-fee-api",
   "version": "1.0.0",
+  "engines": {
+    "iojs": "1.x"
+  },
   "description": "Stripe fee aggregation",
   "main": "app.js",
   "scripts": {
-    "test": "npm test"
+    "test": "mocha tests",
+    "start": "iojs app"
   },
   "repository": {
     "type": "git",
@@ -17,10 +21,16 @@
   },
   "homepage": "https://github.com/autovance/autovance-fee-api",
   "dependencies": {
+    "dotenv": "^1.1.0",
+    "handlebars": "^3.0.3",
     "lodash": "^3.7.0",
+    "moment": "^2.10.2",
     "redis": "^0.12.1",
     "restify": "^3.0.2",
     "schedule": "^0.1.0",
+    "sendgrid": "^1.7.0",
+    "stripe": "^3.3.4",
+    "url": "^0.10.3",
     "when": "^3.7.2"
   }
 }

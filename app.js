@@ -1,6 +1,8 @@
 "use strict";
+require('dotenv').load();
 
 var restify = require('restify'),
+  init = require('./app/init'),
   routes  = require('./app/routes'),
 
   server = restify.createServer({
@@ -18,11 +20,24 @@ server.pre(restify.pre.sanitizePath());
 
 // see ./routes
 server.post({path: '/events/save',         version: '0.1.0'}, routes.saveEvent);
-server.get( {path: '/events/report',       version: '0.1.0'}, routes.report);
-server.get({path: '/events/report/:time',  version: '0.1.0'}, routes.report);
-
+server.get( {path: '/events/report',       version: '0.1.0'}, routes.reportEvents);
 
 // Go!
-server.listen(3000, function () {
+init.isCreated()
+.then(function (reply) {
+  if (!reply) {
+   return init.create();
+  }
+})
+.then(function (reply) {
+  init.inspect();
+})
+.catch(function (err) {
+  console.log(err);
+});
+
+
+var port = process.env.PORT || 3000;
+server.listen(port, function () {
   console.log('%s: Listening on: %s', server.name, server.url);
 });
