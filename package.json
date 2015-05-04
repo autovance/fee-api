@@ -26,6 +26,7 @@
     "lodash": "^3.7.0",
     "moment": "^2.10.2",
     "redis": "^0.12.1",
+    "request": "^2.55.0",
     "restify": "^3.0.2",
     "schedule": "^0.1.0",
     "sendgrid": "^1.7.0",
