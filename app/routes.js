@@ -62,7 +62,7 @@ module.exports = {
                   description: 'Here is a list of all of the fee\'s that were collected this week.',
                   vendor: 'Stripe Payments Platform',
                   list: slist.transactions,
-                  total: resp
+                  total: (resp/100).toFixed(2)
                 }
               });
 

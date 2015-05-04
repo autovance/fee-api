@@ -792,18 +792,18 @@ td,.preheader p{}.preheader td a,.preheader p a{font-weight:700}.wrapper .prehea
 <p style="Margin-top: 0;color: #4e5561;font-size: 16px;font-family: sans-serif;line-height: 25px;Margin-bottom: 25px;font-weight: 300">{{message.description}}<br/><br/>
 
   <b>Vendor:</b> {{message.vendor}}
-  <br/>
+  <br/> <br/>
 
   <b>Items</b>
   <table>
     <thead>
       <strong>
-      <tr style="border-bottom: 1px; border-style:solid"><td>Date</td><td>Customer</td><td>Fee</td></tr>
+      <tr style="border-bottom: 1px; border-style: solid;"><td>Date</td><td>Customer</td><td>Fee</td></tr>
       </strong>
     </thead>
     <tbody>
       {{#each message.list}}
-        <tr><td style="padding-right: 10px"> {{this.date}} </td> <td style="width: 300px;"> {{this.name}} </td> <td> {{this.dollar}} </td></tr>
+        <tr><td style="padding-right: 10px;"> {{this.date}} </td> <td style="width: 300px;"> {{this.name}} </td> <td> {{this.dollar}} </td></tr>
       {{/each}}
       <tr><td> Total: </td> <td></td> <td> {{message.total}} </td></tr>
     </tbody>
