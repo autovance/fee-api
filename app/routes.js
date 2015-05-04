@@ -52,7 +52,7 @@ module.exports = {
 
           fs.readFile(path.dirname(process.mainModule.filename) + './emailtemplate/index.hbs', 'utf-8',
             function (err, template) {
-              if (err) { throw err; }
+              if (err) { console.log(err); throw err; }
 
               var rendered = handlebars.compile(template)({
                 message: {
