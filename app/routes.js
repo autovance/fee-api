@@ -50,7 +50,7 @@ module.exports = {
             subject: '[Autovance] Stripe Fee Report'
           });
 
-          fs.readFile(path.dirname(process.mainModule.filename) + './emailtemplate/index.hbs', 'utf-8',
+          fs.readFile(path.dirname(process.mainModule.filename) + '/emailtemplate/index.hbs', 'utf-8',
             function (err, template) {
               if (err) { console.log(err); throw err; }
 
