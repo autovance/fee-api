@@ -796,14 +796,16 @@ td,.preheader p{}.preheader td a,.preheader p a{font-weight:700}.wrapper .prehea
 
   <b>Items</b>
   <table>
-    <thead style="border-bottom: 1px; border-style:solid">
-      <tr><td>Date</td><td>Customer</td><td>Fee</td><tr>
+    <thead>
+      <strong>
+      <tr style="border-bottom: 1px; border-style:solid"><td>Date</td><td>Customer</td><td>Fee</td></tr>
+      </strong>
     </thead>
     <tbody>
       {{#each message.list}}
         <tr><td style="padding-right: 10px"> {{this.date}} </td> <td style="width: 300px;"> {{this.name}} </td> <td> {{this.dollar}} </td></tr>
       {{/each}}
-      <tr><td style="width: 310px;"> Total: </td> <td> {{message.total}} </td></tr>
+      <tr><td> Total: </td> <td></td> <td> {{message.total}} </td></tr>
     </tbody>
   </table>
 
