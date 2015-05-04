@@ -3,6 +3,7 @@ var events = require('./events'),
   moment = require('moment'),
   handlebars = require('handlebars'),
   fs = require('fs'),
+  path = require('path'),
   sendgrid  = require('sendgrid')(process.env.SENDGRID_USER, process.env.SENDGRID_PASS),
   _ = require('lodash');
 
