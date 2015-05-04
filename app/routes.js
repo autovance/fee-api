@@ -35,6 +35,7 @@ module.exports = {
     .then(function (list) {
 
       _.forEach(list.transactions, function (item) {
+        item.amount = (item.amount/100).toFixed(2);
         delete item.client;
       });
 
@@ -54,15 +55,13 @@ module.exports = {
             function (err, template) {
               if (err) { console.log(err); throw err; }
 
-              console.log(slist);
-
               var rendered = handlebars.compile(template)({
                 message: {
                   name: 'Stripe Fee Reporting',
                   description: 'Here is a list of all of the fee\'s that were collected this week.',
                   vendor: 'Stripe Payments Platform',
                   list: slist.transactions,
-                  total: resp
+                  total: (resp/100).toFixed(2)
                 }
               });
 

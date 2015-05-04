@@ -25,6 +25,7 @@
     "handlebars": "^3.0.3",
     "lodash": "^3.7.0",
     "moment": "^2.10.2",
+    "money": "^0.2.0",
     "redis": "^0.12.1",
     "restify": "^3.0.2",
     "schedule": "^0.1.0",
