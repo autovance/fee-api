@@ -30,7 +30,9 @@ module.exports = {
 
   reportEvents: function (req, res, next) {
 
-    if(req.headers.apikey !== process.env.API_SECRET) {
+    if(
+      (req.headers.apikey !== process.env.API_SECRET) ||
+      (req.headers.apikey === undefined)) {
       res.status(401);
       res.end();
       return next();
