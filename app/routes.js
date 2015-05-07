@@ -1,4 +1,5 @@
 "use strict";
+
 var events = require('./events'),
   moment = require('moment'),
   handlebars = require('handlebars'),
@@ -28,6 +29,14 @@ module.exports = {
   },
 
   reportEvents: function (req, res, next) {
+
+    if(req.headers.apikey !== process.env.API_SECRET) {
+      res.status(401);
+      res.end();
+      return next();
+    }
+
+
     var isEmail = req.query.email || false;
     var slist;
 
