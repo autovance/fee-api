@@ -22,7 +22,7 @@ module.exports = {
     })
     .then(function () {
       res.status(200);
-      res.end();`
+      res.end();
     });
 
     return next();
