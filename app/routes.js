@@ -22,13 +22,15 @@ module.exports = {
     })
     .then(function () {
       res.status(200);
-      res.end();
+      res.end();`
     });
 
     return next();
   },
 
   reportEvents: function (req, res, next) {
+
+    console.log(req);
 
     if(req.headers.apikey !== process.env.API_SECRET) {
       res.status(401);
