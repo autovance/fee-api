@@ -27,8 +27,8 @@ module.exports = {
             return false;
           }
 
-          var date = moment(balanceTransaction.available_on * 1000).format('YYYY.MM.DD'),
-              time = moment(balanceTransaction.available_on * 1000).format('HH:MM');
+          var date = moment.unix(balanceTransaction.available_on).format('YYYY.MM.DD'),
+              time = moment(balanceTransaction.available_on).format('HH:MM');
 
           _.forEach(balanceTransaction.fee_details, function (fee) {
             var obj;
