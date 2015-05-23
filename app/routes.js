@@ -79,7 +79,7 @@ module.exports = {
 
               payload.setHtml(rendered);
               sendgrid.send(payload, function (err) {
-                if (err) {return console.error(err); }
+                if (err) {return console.error(err); isEmail = false;}
               });
 
               res.json({message: 'success', week: 'w' + moment().isoWeek(), transList: list.transactions, sum: resp, emailSent: isEmail});
