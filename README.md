@@ -20,6 +20,6 @@ __Press the button up above for a super easy setup. The only step you need to ta
 6. Scale the heroku web dyno's from 0 to 1 to start the app.
 7. Enjoy!
 
-
-And all you have to do is set up the scheduled report afterwards!
+If you have any troubles or questions, send me a ping [@forstermatth](http://www.twitter.com/forstermatth),
+if you run into any bugs or have a feature request, open up an issue on this page (github)!
 
