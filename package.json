@@ -8,7 +8,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha tests",
-    "start": "iojs app"
+    "start": "node app"
   },
   "repository": {
     "type": "git",

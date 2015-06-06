@@ -1,0 +1,38 @@
+{
+  "name": "Autovance Stripe API",
+  "website": "http://www.autovance.com",
+  "description": "A nodejs API used to collect stripe fees",
+  "repository": "https://github.com/autovance/fee-api",
+  "keywords": ["node", "restify", "stripe", "fee", "email", "autovance"],
+  "success_url": "/events/report",
+  "addons": ["rediscloud", "scheduler"],
+
+  "env": {
+    "API_SECRET": {
+      "description": "A secret key used to access the report route! If not defined the route will be open.",
+      "generator": "secret",
+      "required": false
+    },
+    "EMAIL_RECIPIENT": {
+      "description": "The email address for the recipient of the reports emails",
+      "required": true
+    },
+    "NODE_ENV": {
+      "description": "Used for NPM and others to determine what kind of environment to initialize",
+      "value": "production",
+      "required": false
+    },
+    "SENDGRID_USER": {
+      "description": "The username of the sendgrid user, the service used to send the report emails",
+      "required": true
+    },
+    "SENDGRID_PASS": {
+      "description": "The password used for the sendgrid email service",
+      "required": true
+    },
+    "STRIPE_KEY": {
+      "description": "Your Stripe API key used to gather the information about the charges!",
+      "required": true
+    }
+  }
+}

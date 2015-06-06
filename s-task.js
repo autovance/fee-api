@@ -1,3 +1,6 @@
+// Used to trigger the email report on a weekly basis.
+// _todo_ make it easy to change the frequency / day that the email is sent
+
 var request = require('request'),
   moment = require('moment');
 
