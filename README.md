@@ -14,7 +14,7 @@ Here's how to set it up (i'll be using heroku as the example service):
 6) Scale the heroku web dyno's from 0 to 1 to start the app.
 7) Enjoy!
 
-OR you can press this button:
+OR you can press this button: [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 And all you have to do is set up the scheduled report afterwards!
 

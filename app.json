@@ -1,5 +1,5 @@
 {
-  "name": "Autovance Stripe API",
+  "name": "Stripe Fee Collection API",
   "website": "http://www.autovance.com",
   "description": "A nodejs API used to collect stripe fees",
   "repository": "https://github.com/autovance/fee-api",
