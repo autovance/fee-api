@@ -1,6 +1,7 @@
 # autovance fee api
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 __* See below before pressing *__
 
 Do you have trouble balancing your accounts because of discrepancies caused by the fee's collected by stripe? Well, here may lie the solution.
