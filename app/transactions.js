@@ -5,6 +5,7 @@ var _ = require('lodash'),
   moment = require('moment'),
   url = require('url'),
   redisClient, redisURL;
+
 if (process.env.NODE_ENV === 'production') {
   redisURL = url.parse(process.env.REDISCLOUD_URL);
   redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
