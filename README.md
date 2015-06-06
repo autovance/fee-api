@@ -10,7 +10,7 @@ This small stand alone api built on restify can be run for free on heroku or a s
 
 Here's how to set it up (i'll be using heroku as the example service):
 
-** Press the button up above for a super easy setup. The only step you need to take is #5 **
+__ Press the button up above for a super easy setup. The only step you need to take is #5 __
 
 1. Download / clone the repo to where ever you'd like.
 2. Deploy the app to heroku. This requires a heroku account and an app set up in your dashboard, and the heroku toolbelt application installed.
