@@ -27,8 +27,8 @@ if you run into any bugs or have a feature request, open up an issue on this pag
 # Development / Testing
 
 To run any tests / develop within this repo you need:
-* [[`node.js or equivalent`](https://github.com/nodejs/io.js}] 
-* [[`redis`](http://redis.io/download)]
+* [node.js or equivalent](https://github.com/nodejs/io.js)
+* [redis](http://redis.io/download)
 
 Run `npm install`, `npm install mocha -g` and `mocha tests` to verify your environment.
 
