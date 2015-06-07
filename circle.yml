@@ -6,4 +6,4 @@ deployment:
   production:
     branch: master
     commands:
-      - sh ./heroku-deploy.sh autovance-api
+      - sh ./heroku-deploy.sh autovance-fee-api
