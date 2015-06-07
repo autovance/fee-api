@@ -1,25 +1,6 @@
 dependencies:
   override:
     - npm install
-    - npm install -g gulp pg db-migrate
-
-database:
-  override:
-    - psql -U ubuntu -d circle_test -a -f server/lib/Matrix_create.sql
-    - db-migrate up --config ./server/lib/database.json -e circle
-    - node ./server/lib/initial_rows.js
-
-machine:
-  environment:
-    DATABASE_URL: postgres://ubuntu@localhost:5432/circle_test
-    MATRIX_STAMP: TESTSTAMP
-    CIRCLECI_API_TOKEN: c55a0bc7eb9fb26536f19977605f43f2c8686401
-
-test:
-  override:
-    - gulp lint
-    - mocha server/spec
-    - gulp test-client
 
 deployment:
   production:
