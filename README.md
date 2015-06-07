@@ -1,5 +1,7 @@
 # Autovance: Stripe Charge Fee API & email service.
 
+Tests: [![Circle CI](https://circleci.com/gh/autovance/fee-api/tree/master.svg?style=svg)](https://circleci.com/gh/autovance/fee-api/tree/master)
+
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 __*See below before pressing that juicy button.*__
