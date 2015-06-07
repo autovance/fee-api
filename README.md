@@ -24,3 +24,12 @@ __Press the button up above for a super easy setup. The only steps you need to t
 If you have any troubles or questions, send me a ping [@forstermatth](http://www.twitter.com/forstermatth),
 if you run into any bugs or have a feature request, open up an issue on this page (github)!
 
+# Development / Testing
+
+To run any tests / develop within this repo you need:
+* [[`node.js or equivalent`](https://github.com/nodejs/io.js}] 
+* [[`redis`](http://redis.io/download)]
+
+Run `npm install`, `npm install mocha -g` and `mocha tests` to verify your environment.
+
+Fork the repo, make pull requests and we will do our best to include your changes!
