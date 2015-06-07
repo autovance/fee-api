@@ -21,6 +21,7 @@ test:
     - mocha server/spec
     - gulp test-client
 
+deployment:
   production:
     branch: master
     commands:
