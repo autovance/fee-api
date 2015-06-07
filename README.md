@@ -1,4 +1,4 @@
-# Autovance: Stripe Charge Fee API & email service.
+# Stripe Charge Fee API & email service.
 
 Tests: [![Circle CI](https://circleci.com/gh/autovance/fee-api/tree/master.svg?style=svg)](https://circleci.com/gh/autovance/fee-api/tree/master)
 
