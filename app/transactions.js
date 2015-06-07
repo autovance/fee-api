@@ -159,6 +159,7 @@ TransactionList.prototype.fetch = function (week) {
 
 TransactionList.prototype.delete = function (week) {
   console.log('attemping delete of ' + week);
+
   return this.fetch(week)
   .then(function () {
 
