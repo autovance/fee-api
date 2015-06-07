@@ -14,14 +14,9 @@ if (process.env.NODE_ENV === 'production') {
   redisClient = redis.createClient();
 }
 
-
-// Transaction Models
-
-// incremental key to set the transaction id
-// hashes to store the actual transactions
-// lists with weekly keys to store the transactions keys
-// report on the last weeks list .. still stores historical datanpm
-
+/**
+ * Class to represent a single transaction
+ */
 
 function Transaction(obj, client) {
   this.client = client || redisClient;
@@ -49,7 +44,7 @@ Transaction.prototype.save = function() {
       if (err || (reply === null)) reject(new Error('No trans key?'));
 
       this.key = reply;
-      console.log(week);
+
       multi.hmset(this.key, {
         key: this.key,
         date: this.date,
@@ -82,6 +77,10 @@ Transaction.prototype.set = function (obj) {
   this.name = obj.name;
   this.amount = obj.amount;
 }
+
+/**
+ * Class to facilitate the representation of many transactions
+ */
 
 function TransactionList(client) {
   this.client = client || redisClient;
@@ -156,6 +155,32 @@ TransactionList.prototype.fetch = function (week) {
   }.bind(this));
 
   return promise;
+}
+
+TransactionList.prototype.delete = function (week) {
+  console.log('attemping delete of ' + week);
+  return this.fetch(week)
+  .then(function () {
+
+    return when.promise(function (resolve, reject) {
+      _.forEach(this.transactions, function (transaction) {
+        this.client.del(transaction.key, function (err, reply) {
+          if (err) {
+            reject(err);
+            return;
+          }
+
+          console.log('del trans ' + transaction.key + ': SUCCESS');
+          resolve(true);
+        });
+      }.bind(this));
+      this.client.del('w' + week);
+    }.bind(this));
+
+  }.bind(this))
+  .catch(function (err) {
+    // grace
+  });
 }
 
 module.exports = {

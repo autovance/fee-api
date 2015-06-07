@@ -33,6 +33,15 @@
     "STRIPE_KEY": {
       "description": "Your Stripe API key used to gather the information about the charges!",
       "required": true
+    },
+    "SELF_URL": {
+      "description": "The URL of the heroku app. Must be a URI without the protocol or trailing slash.",
+      "required": true,
+      "value": "example-app.herokuapp.com"
+    },
+    "DELETE_THRESHOLD": {
+      "description": "The number of weeks to keep behind the old. The system will attempt to delete the week behind the current determined by this number. EG. If this week was week 32 and the number was 4 it would attempt to delete week 28.",
+      "value": "4"
     }
   }
 }

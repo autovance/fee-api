@@ -165,6 +165,7 @@ describe("Transaction Models", function (done) {
           list.transactions[1].key = "1";
           check = list.transactions;
           list.transactions = [];
+
           return list.fetch('w' + moment().isoWeek());
         })
         .then(function (reply) {
@@ -201,6 +202,38 @@ describe("Transaction Models", function (done) {
           expect(reply).to.equal(33.44 + 33.45);
           expect(reply).to.equal(66.89);
           done();
+        });
+      });
+    });
+
+    describe('delete', function (done) {
+
+      it('should delete a week and its keys', function (done) {
+        var check, item1 = new Transactions.item(),
+          item2 = new Transactions.item();
+
+        item1.date = moment().format('YYYY.MM.DD');
+        item1.time = moment().format('HH:MM');
+        item1.name = 'Test Transaction';
+        item1.amount = '33.44';
+
+        item2.date = moment().format('YYYY.MM.DD');
+        item2.time = moment().format('HH:MM');
+        item2.name = 'Test Transaction';
+        item2.amount = '33.45';
+
+        list.transactions[0] = item1;
+        list.transactions[1] = item2;
+
+        list.save()
+        .then(function () {
+          list.delete('w' + moment().isoWeek())
+          .then(function () {
+            redisClient.get('0', function (err, reply) {
+              expect(reply).to.be.a('null');
+              done();
+            });
+          });
         });
       });
     });

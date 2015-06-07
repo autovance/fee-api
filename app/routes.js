@@ -56,8 +56,8 @@ module.exports = {
         if (isEmail) {
           var payload = new sendgrid.Email({
             to: process.env.EMAIL_RECIPIENT,
-            from: 'no-reply@autovance.com',
-            subject: '[Autovance] Stripe Fee Report'
+            from: process.env.EMAIL_SENDER,
+            subject: '[Fee API] Stripe Fee Report'
           });
 
           fs.readFile('.' /*+ path.dirname(process.mainModule.filename)*/ + '/app/emailtemplate/index.hbs', 'utf-8',
