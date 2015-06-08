@@ -17,6 +17,10 @@
       "description": "The email address for the recipient of the reports emails",
       "required": true
     },
+    "EMAIL_SENDER": {
+      "description": "The email address for the percieved origin of the reports emails",
+      "required": true
+    },
     "NODE_ENV": {
       "description": "Used for NPM and others to determine what kind of environment to initialize",
       "value": "production",
