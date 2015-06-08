@@ -1,5 +1,15 @@
 # Stripe Fee API ChangeLog
 
+## 2015-06-07, Version 1.1.1
+
+### Notable changes
+
+* **env**: ensure email_sender is included in the app.json
+
+### Commits
+
+* [[`2eba361a8c`](https://github.com/autovance/fee-api/commit/2eba361a8c)] - **email,env**:  add missing email sender env [#15](https://github.com/autovance/fee-api/pull/15)
+
 ## 2015-06-07, Version 1.1.0
 
 ### Notable changes
