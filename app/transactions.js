@@ -175,8 +175,15 @@ TransactionList.prototype.delete = function (week) {
           resolve(true);
         });
       }.bind(this));
-      console.log('del week key ' + week);
-      this.client.del(week);
+
+      this.client.del(week, function (err, reply) {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        console.log('del week key ' + week + ': SUCCESS');
+      });
     }.bind(this));
 
   }.bind(this))
