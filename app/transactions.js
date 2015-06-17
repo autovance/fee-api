@@ -159,6 +159,7 @@ TransactionList.prototype.fetch = function (week) {
 
 TransactionList.prototype.delete = function (week) {
   console.log('attemping delete of ' + week);
+
   return this.fetch(week)
   .then(function () {
 
@@ -174,7 +175,8 @@ TransactionList.prototype.delete = function (week) {
           resolve(true);
         });
       }.bind(this));
-      this.client.del('w' + week);
+      console.log('del week key ' + week);
+      this.client.del(week);
     }.bind(this));
 
   }.bind(this))
