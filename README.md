@@ -23,7 +23,7 @@ __Press the button up above for a super easy setup. The only steps you need to t
 7. Scale the heroku web dyno's from 0 to 1 to start the app.
 8. Enjoy!
 
-The email included in the application at the moment is an Autovace templated handlebars file that you are welcome to use. You are welcome to fork the repo and change it if you like, and we might move towards a hosted email template in the future to make it easy. Please be aware that the templated variables included should stay the same for the template to work as it does right now. 
+The email included in the application at the moment is an Autovance templated handlebars file that you are welcome to use. You are welcome to fork the repo and change it if you like, and we might move towards a hosted email template in the future to make it easy. Please be aware that the templated variables included should stay the same for the template to work as it does right now. 
 
 If you have any troubles or questions, send me a ping [@forstermatth](http://www.twitter.com/forstermatth),
 if you run into any bugs or have a feature request, open up an issue on this page (github)!
