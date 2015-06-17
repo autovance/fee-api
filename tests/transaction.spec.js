@@ -166,7 +166,7 @@ describe("Transaction Models", function (done) {
           check = list.transactions;
           list.transactions = [];
 
-          return list.fetch('w' + moment().isoWeek());
+          return list.fetch(moment().isoWeek());
         })
         .then(function (reply) {
           if (reply) {
@@ -227,7 +227,7 @@ describe("Transaction Models", function (done) {
 
         list.save()
         .then(function () {
-          list.delete('w' + moment().isoWeek())
+          list.delete(moment().isoWeek())
           .then(function () {
             redisClient.get('0', function (err, reply) {
               expect(reply).to.be.a('null');

@@ -36,19 +36,17 @@ module.exports = {
       return next();
     }
 
-
     var isEmail = req.query.email || false;
     var slist;
 
     events.report()
     .then(function (list) {
+      slist = list;
 
       _.forEach(list.transactions, function (item) {
         item.dollar = (item.amount/100).toFixed(2);
         delete item.client;
       });
-
-      slist = list;
 
       list.sum()
       .then(function (resp) {

@@ -120,7 +120,9 @@ TransactionList.prototype.save = function () {
 
 TransactionList.prototype.fetch = function (week) {
   var promise, actions = [];
+  week = 'w' + week;
   this.transactions = [];
+  this.key = week;
 
   promise = when.promise(function (resolve, reject) {
     this.client.lrange(week, 0, -1, function (err, replies) {
@@ -176,7 +178,7 @@ TransactionList.prototype.delete = function (week) {
         });
       }.bind(this));
 
-      this.client.del(week, function (err, reply) {
+      this.client.del('w' + week, function (err, reply) {
         if (err) {
           reject(err);
           return;

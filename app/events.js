@@ -65,7 +65,9 @@ module.exports = {
     list = new List();
 
     // delete a set number of weeks behind the current
-    dlist.delete('w' + (week - process.env.DELETE_THRESHOLD));
+     if (process.env.DELETE_THRESHOLD > 0) {
+       dlist.delete(week - process.env.DELETE_THRESHOLD);
+     }
 
     return list.fetch(week)
     .then(function (result) {
