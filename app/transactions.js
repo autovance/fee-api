@@ -172,7 +172,7 @@ TransactionList.prototype.delete = function (week) {
           }
 
           console.log('del trans ' + transaction.key + ': SUCCESS');
-          resolve(true);
+          return;
         });
       }.bind(this));
 
@@ -183,6 +183,7 @@ TransactionList.prototype.delete = function (week) {
         }
 
         console.log('del week key ' + week + ': SUCCESS');
+        resolve(true);
       });
     }.bind(this));
 

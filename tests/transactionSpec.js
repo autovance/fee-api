@@ -236,6 +236,37 @@ describe("Transaction Models", function (done) {
           });
         });
       });
+
+      it('should not delete anything but the week specified', function (done) {
+        var check, item1 = new Transactions.item(),
+          item2 = new Transactions.item();
+
+        item1.date = moment().format('YYYY.MM.DD');
+        item1.time = moment().format('HH:MM');
+        item1.name = 'Test Transaction';
+        item1.amount = '33.44';
+
+        item2.date = moment().format('YYYY.MM.DD');
+        item2.time = moment().format('HH:MM');
+        item2.name = 'Test Transaction';
+        item2.amount = '33.45';
+
+        list.transactions[0] = item1;
+        list.transactions[1] = item2;
+
+        list.save()
+        .then(function () {
+          list.delete('w' + (moment().isoWeek() - 1))
+          .then(function () {
+            redisClient.hgetall('0', function (err, reply) {
+
+              console.log(reply);
+              expect(reply).to.be.ok;
+              done();
+            });
+          });
+        });
+      });
     });
   });
 });
