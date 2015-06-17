@@ -10,7 +10,12 @@ Do you have trouble balancing your accounts because of discrepancies caused by t
 
 This small stand alone api built on restify can be run for free on heroku or a similar service, and uses node.js (/ io.js) to run. Dead simple to deploy, the service recieves charge notifications from stripe and stores the fee's associated with those charges in a redis store. It then collects them on a weekly schedule and sends them formatted as an email.
 
-Here's how to set it up (i'll be using heroku as the example service):
+**Requirements:** 
+ * A Sendgrid account - this is what we use to send the emails within the application. You'll need to provide the account name and key so the app can send emails on it's own.
+ * A stripe account, and knowledge of how to set up webhooks, as well as access to your api keys.
+ * _for the auto-deply only: A heroku account_
+
+Here's how to set it up (I'll be using heroku as the example service):
 
 __Press the button up above for a super easy setup. The only steps you need to take is #5 & #6__
 
