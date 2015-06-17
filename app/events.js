@@ -61,8 +61,8 @@ module.exports = {
   report: function () {
     var promise, list, dlist, week = moment().isoWeek();
 
-    dlist = new list();
-    list = new list();
+    dlist = new List();
+    list = new List();
 
     // delete a set number of weeks behind the current
     dlist.delete('w' + (week - process.env.DELETE_THRESHOLD));
