@@ -175,7 +175,7 @@ TransactionList.prototype.delete = function (week) {
           resolve(true);
         });
       }.bind(this));
-      this.client.del('w' + week);
+      this.client.del(week);
     }.bind(this));
 
   }.bind(this))
